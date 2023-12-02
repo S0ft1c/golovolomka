@@ -1,3 +1,4 @@
 from .player.animated_player import player, AnimatedPlayer
-from .room.room_main_walls import MainWall, room_main_walls
-from .terminal.terminal import terminal, Terminal
+from .room.room_main_walls import MainWall
+from .terminal.terminal import Terminal
+from .room.main_room import MainRoom

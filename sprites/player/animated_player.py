@@ -1,4 +1,5 @@
 import pygame
+from funcs import load_image
 
 
 # TODO: сделать отзеркаленный массив для анимации бега назад (только назад и хватит)
@@ -60,11 +61,11 @@ class AnimatedPlayer(pygame.sprite.Sprite):
 
 
 # creation of the player
-idle_img = pygame.transform.rotozoom(pygame.image.load("static/Cyborg/Cyborg_idle_0.png"), 0, 3).convert_alpha()
+idle_img = pygame.transform.rotozoom(pygame.image.load("data/Cyborg/Cyborg_idle_0.png"), 0, 3).convert_alpha()
 images = [  # TODO: добавить побольше кадров (они есть в статике, мне было просто лень)
-    pygame.transform.rotozoom(pygame.image.load("static/Cyborg/Cyborg_run_0.png"), 0, 3).convert_alpha(),
-    pygame.transform.rotozoom(pygame.image.load("static/Cyborg/Cyborg_run_1.png"), 0, 3).convert_alpha(),
-    pygame.transform.rotozoom(pygame.image.load("static/Cyborg/Cyborg_run_2.png"), 0, 3).convert_alpha(),
-    pygame.transform.rotozoom(pygame.image.load("static/Cyborg/Cyborg_run_3.png"), 0, 3).convert_alpha(),
+    pygame.transform.rotozoom(load_image("Cyborg/Cyborg_run_0.png"), 0, 3).convert_alpha(),
+    pygame.transform.rotozoom(load_image("Cyborg/Cyborg_run_1.png"), 0, 3).convert_alpha(),
+    pygame.transform.rotozoom(load_image("Cyborg/Cyborg_run_2.png"), 0, 3).convert_alpha(),
+    pygame.transform.rotozoom(load_image("Cyborg/Cyborg_run_3.png"), 0, 3).convert_alpha(),
 ]
 player = AnimatedPlayer(idle_img, images, 100, 100)

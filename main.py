@@ -2,6 +2,8 @@ import sys
 import pygame
 import sprites as sp
 import utils
+from funcs import load_image
+from custom_events import *
 
 
 def main(screen: pygame.Surface):
@@ -10,10 +12,18 @@ def main(screen: pygame.Surface):
 
     # background creation
     background = pygame.transform.rotozoom(
-        pygame.image.load('static/room_assets/2 Background/1.png'),
-    0, 4,
+        load_image('room_assets/2 Background/1.png'),
+        0, 4,
     )
     background_rect = background.get_rect()
+
+    # логика на комнаты, тут такое происходит...
+    was_room = 'main_room'  # тут храним, какая комната была еще до захода в терминал
+    cur_state = 'main_room'
+    room = sp.MainRoom(screen, sp.player)
+    rooms_labirint = []
+    terminal_action = None  # изначально пользователь не в терминале
+    difficulty = 0
 
     # main loop
     running = True
@@ -23,25 +33,35 @@ def main(screen: pygame.Surface):
             if event.type == pygame.QUIT:  # exit
                 running = False
 
-        # проверяем, надо ли показывать подсказку с буковой E
-        utils.terminal_hint_check(sp.terminal, sp.player)
+            if event.type == OPEN_TERMINAL:  # если пользователь открывает терминал, то мы изменяем статус
+                was_room = cur_state
+                cur_state = 'interminal'
 
-        # check for the movement inputs
-        objs = sp.room_main_walls.sprites()  # тут мы создаем список всех активных объектов
-        objs.append(sp.terminal)
-        utils.player_movement_inputs_check(sp.player, objs)
+                # нам надо понять, какой именно терминал заработал
+                terminal_action = room.get_terminal_action().get_the_action_screen()
 
-        screen.blit(background, background_rect)  # clear all the screen
+            if event.type == CLOSE_TERMINAL:  # если мы закрываем терминал
+                cur_state = was_room
 
-        # player logic
-        sp.player.update()
-        sp.player.draw(screen)
+            if event.type == CREATE_NEW_GAME:  # делаем новую игру
+                # TODO: добавить создание нового сохранения
+                utils.room_creation(difficulty)
 
-        # main walls logic
-        sp.room_main_walls.draw(screen)
+        if cur_state != 'interminal':
+            # проверяем коллизии
+            objs = room.get_objs()
+            utils.player_movement_inputs_check(sp.player, objs)
 
-        # terminal logic
-        sp.terminal.update(screen)
+            screen.blit(background, background_rect)  # clear all the screen
+
+            # player logic
+            sp.player.update()
+            sp.player.draw(screen)
+
+            # room update logic
+            room.update()
+        else:
+            terminal_action.update()
 
         pygame.display.flip()  # update the screen
         clock.tick(60)

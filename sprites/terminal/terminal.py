@@ -1,32 +1,21 @@
 import pygame
 from ..player.animated_player import AnimatedPlayer
+from .terminal_parent import TerminalParent
 
 
-class Terminal(pygame.sprite.Sprite):
+class Terminal(TerminalParent):
     def __init__(self, image, x, y, action):
-        super().__init__()
+        super().__init__(image, x, y, action)
 
-        self.image: pygame.Surface = image
-        self.rect = self.image.get_rect(topleft=(x, y))
-        self.action = action
-        self.is_near = False
+    def update(self, screen, player: AnimatedPlayer):
+        # смотрим, может ли игрок нажать по расстоянию
+        length = ((player.rect.x - self.rect.x) ** 2 + (player.rect.y - self.rect.y) ** 2) ** 0.5
+        if length <= 100:  # если расстояние от персонажа и до терминала меньше 10ти пикселей
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_e]:  # если он нажал кнопку E
+                self.use_terminal()
 
-    def update(self, screen):
         # TODO: сделать анимацию подсказки для терминала на буковку E
 
         # просто обновляем информацию по поводу терминала
         screen.blit(self.image, self.rect)
-
-    def check_collision(self, player: AnimatedPlayer):
-        if self.rect.colliderect(player.rect):  # если пересекаются коллизии
-            return True
-        else:
-            return False
-
-
-image = pygame.transform.rotozoom(
-    pygame.image.load('static/room_assets/terminal.png'),
-    0, 0.5
-).convert()
-
-terminal = Terminal(image, 250, 250, None)
