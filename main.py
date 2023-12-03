@@ -2,7 +2,8 @@ import sys
 import pygame
 import sprites as sp
 import utils
-from funcs import load_image
+from funcs.load_image import load_image  # kinda cringe
+from funcs.get_room_by_type import get_room_by_type
 from custom_events import *
 
 
@@ -45,9 +46,20 @@ def main(screen: pygame.Surface):
 
             if event.type == CREATE_NEW_GAME:  # делаем новую игру
                 # TODO: добавить создание нового сохранения
-                utils.room_creation(difficulty)
+                difficulty = 1  # TODO: реализовать полноценную функцию по расчету ф-ии сложности
+                rooms_labirint = utils.room_creation(difficulty)
+
+                # сразу проставляем, где мы находимся
+                cur_state = 1
 
         if cur_state != 'interminal':
+
+            # если комната поменялась
+            if was_room != cur_state:
+                # получаем новую комнату
+                room = get_room_by_type(rooms_labirint[cur_state]['type'], screen, sp.player)
+                was_room = cur_state  # теперь мы окончательно здесь
+
             # проверяем коллизии
             objs = room.get_objs()
             utils.player_movement_inputs_check(sp.player, objs)

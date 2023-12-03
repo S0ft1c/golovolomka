@@ -1,6 +1,10 @@
+from sprites import AnimatedPlayer
+
+
 class RoomParent:
-    def __init__(self):
-        pass
+    def __init__(self, screen, player: AnimatedPlayer):
+        self.screen = screen
+        self.player = player
 
     def update(self):
         """

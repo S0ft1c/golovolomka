@@ -1,6 +1,7 @@
-# TODO: после того, как будет сделана БД с сохранениями, мы будем выбирать сложность
-def room_creation(difficulty: int):
-    terminal_rooms_count = 3
+from room_labirints_assets import assets
+from random import choice
 
-    # default room
-    spawn_room = {'left': 'end_level', 'right': 'terminal1_room', 'top': 'no', 'bottom': 'no'}
+
+def room_creation(difficulty: int):
+    variants_list = assets[difficulty - 1]
+    return choice(variants_list)

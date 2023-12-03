@@ -1,5 +1,5 @@
 import pygame
-from funcs import load_image
+from funcs.load_image import load_image
 
 
 # TODO: сделать отзеркаленный массив для анимации бега назад (только назад и хватит)
