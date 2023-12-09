@@ -1,5 +1,4 @@
 import sys
-import pygame
 import sprites as sp
 import utils
 from funcs.load_image import load_image  # kinda cringe
@@ -51,6 +50,71 @@ def main(screen: pygame.Surface):
 
                 # сразу проставляем, где мы находимся
                 cur_state = 1
+
+            # TODO: сделать обработчик выхода в exit
+            if event.type == PLAYER_OUT_OF_RIGHT:  # игрок вышел за границы экрана справа
+                sp.player.to_left_side()  # перемещаем игрока налево
+
+                exits = \
+                    utils.get_exits(rooms_labirint[rooms_labirint[cur_state]['directions']['right']]['directions'])
+
+                # получаем новую комнату
+                room = get_room_by_type(
+                    rooms_labirint[rooms_labirint[cur_state]['directions']['right']]['type'],
+                    screen,
+                    sp.player,
+                    exits
+                )
+                cur_state = rooms_labirint[cur_state]['directions']['right']
+                was_room = cur_state  # теперь мы окончательно здесь
+
+            if event.type == PLAYER_OUT_OF_LEFT:
+                sp.player.to_right_side()  # перемещаем игрока налево
+
+                exits = \
+                    utils.get_exits(rooms_labirint[rooms_labirint[cur_state]['directions']['left']]['directions'])
+
+                # получаем новую комнату
+                room = get_room_by_type(
+                    rooms_labirint[rooms_labirint[cur_state]['directions']['left']]['type'],
+                    screen,
+                    sp.player,
+                    exits
+                )
+                cur_state = rooms_labirint[cur_state]['directions']['left']
+                was_room = cur_state  # теперь мы окончательно здесь
+
+            if event.type == PLAYER_OUT_OF_UP:
+                sp.player.to_down_side()  # перемещаем игрока налево
+
+                exits = \
+                    utils.get_exits(rooms_labirint[rooms_labirint[cur_state]['directions']['up']]['directions'])
+
+                # получаем новую комнату
+                room = get_room_by_type(
+                    rooms_labirint[rooms_labirint[cur_state]['directions']['up']]['type'],
+                    screen,
+                    sp.player,
+                    exits
+                )
+                cur_state = rooms_labirint[cur_state]['directions']['up']
+                was_room = cur_state  # теперь мы окончательно здесь
+
+            if event.type == PLAYER_OUT_OF_DOWN:
+                sp.player.to_up_side()  # перемещаем игрока налево
+
+                exits = \
+                    utils.get_exits(rooms_labirint[rooms_labirint[cur_state]['directions']['down']]['directions'])
+
+                # получаем новую комнату
+                room = get_room_by_type(
+                    rooms_labirint[rooms_labirint[cur_state]['directions']['down']]['type'],
+                    screen,
+                    sp.player,
+                    exits
+                )
+                cur_state = rooms_labirint[cur_state]['directions']['down']
+                was_room = cur_state  # теперь мы окончательно здесь
 
         if cur_state != 'interminal':
 

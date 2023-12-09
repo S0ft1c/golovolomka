@@ -20,7 +20,7 @@ def create_main_walls_with_exits(*args):
 
     # для начала верхний слой (каждая картинка будет на 64 пикселя после rotozoom)
     for x in range(0, 1024, 64):
-        if 'up' in args and (x == 512 or x == 448):  # если у нас должна быть дырень
+        if 'up' in args and (x == 448 - 64 or x == 448):  # если у нас должна быть дырень
             continue
 
         wall = MainWall(rd_walls_list, x, 0)

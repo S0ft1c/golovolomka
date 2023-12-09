@@ -10,7 +10,7 @@ class SpawnRoom(RoomParent):
         self.brain_terminal = place_terminal(500, 500, None)
 
     def update(self):
-        # TODO: написать обработчики выхода за пределы комнат
+        super().update()
         self.room_main_walls.draw(self.screen)
         self.brain_terminal.update(self.screen, self.player)
 

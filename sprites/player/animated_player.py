@@ -59,6 +59,18 @@ class AnimatedPlayer(pygame.sprite.Sprite):
     def stop_moving(self):
         self.moving = False
 
+    def to_left_side(self):
+        self.rect.x = 0 + 30
+
+    def to_right_side(self):
+        self.rect.x = 1024 - 30
+
+    def to_down_side(self):
+        self.rect.y = 896 - 30
+
+    def to_up_side(self):
+        self.rect.y = 0 + 30
+
 
 # creation of the player
 idle_img = pygame.transform.rotozoom(pygame.image.load("data/Cyborg/Cyborg_idle_0.png"), 0, 3).convert_alpha()

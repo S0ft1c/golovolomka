@@ -4,3 +4,4 @@ from .create_main_walls import create_main_walls
 from .place_terminal import place_terminal
 from .room_creation import room_creation
 from .create_main_walls_with_exits import create_main_walls_with_exits
+from .get_exits import get_exits

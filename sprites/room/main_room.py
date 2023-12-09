@@ -12,6 +12,7 @@ class MainRoom(RoomParent):
         self.start_game_terminal = place_terminal(250, 250, self.start_game_action)  # create the terminal start game
 
     def update(self):  # это метод отвечающий за обновление всех элементов комнаты
+        super().update()
         self.room_main_walls.draw(self.screen)
         self.start_game_terminal.update(self.screen, self.player)
 
