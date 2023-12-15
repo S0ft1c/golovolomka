@@ -4,6 +4,7 @@ import utils
 from funcs.load_image import load_image  # kinda cringe
 from funcs.get_room_by_type import get_room_by_type
 from custom_events import *
+from db_class import db
 
 
 def main(screen: pygame.Surface):
@@ -23,7 +24,14 @@ def main(screen: pygame.Surface):
     room = sp.MainRoom(screen, sp.player)
     rooms_labirint = []
     terminal_action = None  # изначально пользователь не в терминале
+
+    level_count = 1
     difficulty = 0
+    level_asset = -1
+    coord_x, coord_y = 0, 0
+    terminals_completed = 0
+    health = 3
+    cur_save_id = -1  # тут храним с каким сейвом работаем вообще
 
     # main loop
     running = True
@@ -43,10 +51,26 @@ def main(screen: pygame.Surface):
             if event.type == CLOSE_TERMINAL:  # если мы закрываем терминал
                 cur_state = was_room
 
+            if event.type == LOAD_GAME:
+                cur_save_id = room.get_load_save_id()
+                data = db.get_all_save_info_by_id(cur_save_id)
+                level_count = data[2]
+                difficulty = data[3]
+                level_asset = data[4]
+                cur_state = data[5]
+                coord_x, coord_y = data[6], data[7]
+                terminals_completed = data[8]
+                health = data[9]
+
+                rooms_labirint = utils.get_level_labirint_by_asset_difficulty(level_asset, difficulty)
+                sp.player.rect.x, sp.player.rect.y = coord_x, coord_y
+
             if event.type == CREATE_NEW_GAME:  # делаем новую игру
-                # TODO: добавить создание нового сохранения
                 difficulty = 1  # TODO: реализовать полноценную функцию по расчету ф-ии сложности
-                rooms_labirint = utils.room_creation(difficulty)
+                rooms_labirint, level_asset = utils.room_creation(difficulty)
+                sp.player.rect.x, sp.player.rect.y = 200, 200
+
+                db.create_save(level_asset)  # create the save
 
                 # сразу проставляем, где мы находимся
                 cur_state = 1
