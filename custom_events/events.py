@@ -10,3 +10,5 @@ PLAYER_OUT_OF_RIGHT = pygame.USEREVENT + 4  # если игрок вышел з�
 PLAYER_OUT_OF_LEFT = pygame.USEREVENT + 5  # если игрок вышел за границы налево
 PLAYER_OUT_OF_UP = pygame.USEREVENT + 6  # если игрок вышел за границы вверх
 PLAYER_OUT_OF_DOWN = pygame.USEREVENT + 7  # если игрок вышел за границы вниз
+
+TERMINAL_COMPLETED = pygame.USEREVENT + 9  # если терминал пройден

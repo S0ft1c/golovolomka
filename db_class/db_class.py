@@ -1,6 +1,7 @@
 import sqlite3
 import time
 from datetime import datetime
+import json
 
 
 class DB:
@@ -18,7 +19,7 @@ class DB:
         last_time DATETIME,
         level_count integer,
         difficulty integer,
-        level_asset integer,
+        level_asset text,
         last_room_id integer,
         coord_x integer,
         coord_y integer,
@@ -28,8 +29,9 @@ class DB:
         )""")
         self.conn.commit()
 
-    def create_save(self, level_asset: int):
+    def create_save(self, level_asset: str):
         try:
+            level_asset = json.dumps(level_asset)
             self.cur.execute(f"""insert into saves (
             last_time,
             level_count,
@@ -70,6 +72,14 @@ class DB:
             return data
         except Exception as e:
             print(f'DB -> Error in get_save_info_by_id()\n{e}')
+
+    def update_completed_terminal_in_save(self, terminal_completed, level_asset, save_id):
+        try:
+            self.cur.execute("""update saves set terminals_completed=?, level_asset=? where id=?""",
+                             (terminal_completed, json.dumps(level_asset), save_id))
+            self.conn.commit()
+        except Exception as e:
+            print(f'DB -> Error in update_completed_terminal_in_save()\n{e}')
 
 
 db = DB()

@@ -1,4 +1,4 @@
-from sprites import SpawnRoom, Terminal1Room
+from sprites import SpawnRoom, Terminal1Room, Terminal1RoomMaxwellCat
 
 
 def get_room_by_type(type: str, screen, player, exits=None):
@@ -10,7 +10,10 @@ def get_room_by_type(type: str, screen, player, exits=None):
     :param type: какого типа надо открыть комнату
     :return: объект нужной комнаты
     """
-    if type == 'spawn_room':
+    nt = type.replace('_compl', '')
+    if nt == 'spawn_room':
         return SpawnRoom(screen, player)
-    if type == 'terminal1_room':
+    if nt == 'terminal1_room':
         return Terminal1Room(screen, player, exits)
+    if nt == 'terminal1room_maxwell_cat':
+        return Terminal1RoomMaxwellCat(screen, player, exits, compl=('_compl' in type))

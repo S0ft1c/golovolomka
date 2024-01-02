@@ -19,7 +19,8 @@ class SpawnRoom(RoomParent):
         objs.append(self.brain_terminal)
         return objs
 
-    def get_terminal_action(self):
-        for terminal in [self.brain_terminal]:
-            if terminal.get_using():  # если терминал используется
-                return terminal.action
+    def get_terminal_action(self):  # Просто надо писать эту функцию
+        pass
+        # for terminal in [self.brain_terminal]:
+        #     if terminal.get_using():  # если терминал используется
+        #         return terminal.action
