@@ -7,7 +7,6 @@ from custom_events import *
 class CyberpunkTerminal:
     def __init__(self, screen):
         self.screen = screen
-        pygame.display.set_caption("Cyberpunk Terminal")
 
         # Загрузка изображений
         self.image1 = pygame.transform.rotozoom(

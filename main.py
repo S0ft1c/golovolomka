@@ -149,13 +149,24 @@ def main(screen: pygame.Surface):
                     screen,
                     sp.player, exits
                 )
-                terminals_completed += 1
                 db.update_completed_terminal_in_save(
                     terminals_completed,
                     rooms_labirint,
+                    sp.player.rect.x, sp.player.rect.y,
+                    cur_state,
                     cur_save_id
                 )
-                pass
+
+            if event.type == TERMINAL_LOST:
+                cur_state = was_room
+                health -= 1
+                # в этом изменении терминал не меняется, потому как надо дать возможность повторного прохождения
+                db.update_health_lost_in_save(
+                    health,
+                    sp.player.rect.x, sp.player.rect.y,
+                    cur_state,
+                    cur_save_id
+                )
 
         if cur_state != 'interminal':
 

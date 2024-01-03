@@ -73,13 +73,27 @@ class DB:
         except Exception as e:
             print(f'DB -> Error in get_save_info_by_id()\n{e}')
 
-    def update_completed_terminal_in_save(self, terminal_completed, level_asset, save_id):
+    def update_completed_terminal_in_save(self, terminal_completed, level_asset, x, y, cur_room, save_id):
         try:
-            self.cur.execute("""update saves set terminals_completed=?, level_asset=? where id=?""",
-                             (terminal_completed, json.dumps(level_asset), save_id))
+            self.cur.execute("""
+            update saves set terminals_completed=?, level_asset=?, coord_x=?, coord_y=?, last_room_id=?
+            where id=?
+            """,
+                             (terminal_completed, json.dumps(level_asset), x, y, cur_room, save_id,))
             self.conn.commit()
         except Exception as e:
             print(f'DB -> Error in update_completed_terminal_in_save()\n{e}')
+
+    def update_health_lost_in_save(self, health, x, y, cur_room, save_id):
+        try:
+            self.cur.execute("""
+             update saves set health=?, coord_x=?, coord_y=?, last_room_id=?
+             where id=?
+             """,
+                             (health, x, y, cur_room, save_id,))
+            self.conn.commit()
+        except Exception as e:
+            print(f'DB -> Error in update_health_lost_in_save()\n{e}')
 
 
 db = DB()

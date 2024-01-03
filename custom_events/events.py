@@ -12,3 +12,4 @@ PLAYER_OUT_OF_UP = pygame.USEREVENT + 6  # если игрок вышел за �
 PLAYER_OUT_OF_DOWN = pygame.USEREVENT + 7  # если игрок вышел за границы вниз
 
 TERMINAL_COMPLETED = pygame.USEREVENT + 9  # если терминал пройден
+TERMINAL_LOST = pygame.USEREVENT + 10  # если терминал был провален

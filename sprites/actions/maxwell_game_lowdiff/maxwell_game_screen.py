@@ -3,6 +3,7 @@ from pygame.sprite import Group
 from .adds.maxwell_cat import MaxwellCat
 from .adds.laser_point import LaserPoint
 from .adds.cyberpunk_terminal import CyberpunkTerminal
+from .adds.dead_screen import DeadScreen
 import time
 from funcs.load_image import load_image
 
@@ -35,11 +36,17 @@ class LaserHuntGame:
         self.font = pygame.font.Font(None, 36)
 
         self.completed = False  # пройдена головоломка или нет
+        self.died = False  # проиграл он или нет
+
+        # это экраны для смерти и победы
+        self.ct = CyberpunkTerminal(self.screen)
+        self.ds = DeadScreen(self.screen)
 
     def update(self):
-        if self.completed:
-            ct = CyberpunkTerminal(self.screen)
-            ct.display_cyberpunk_screen()
+        if self.died:
+            self.ds.display_dead_screen()
+        elif self.completed:
+            self.ct.display_cyberpunk_screen()
         else:
             keys = pygame.key.get_pressed()
             self.maxwell_cat.update(keys)
@@ -54,7 +61,7 @@ class LaserHuntGame:
             elapsed_time = time.time() - self.start_time
             if elapsed_time >= self.duration:
                 self.completed = True
-                pass  # TODO: терминал пройден
+                pass
 
             for laser_point in self.laser_points:
                 if laser_point.rect.bottom > self.screen_rect.bottom:
@@ -67,6 +74,7 @@ class LaserHuntGame:
             self.draw()
 
             if self.missed_apples >= 5:
+                self.died = True
                 pass  # TODO: терминал провален
 
     def draw(self):
