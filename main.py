@@ -34,6 +34,10 @@ def main(screen: pygame.Surface):
     health = 3
     cur_save_id = -1  # тут храним с каким сейвом работаем вообще
 
+    # для сердечек
+    heart_image = pygame.transform.scale(load_image('minecraft_heart.png'), (40, 40))
+    heart_spacing = 50
+
     # main loop
     running = True
     while running:
@@ -172,8 +176,10 @@ def main(screen: pygame.Surface):
 
             # если комната поменялась
             if was_room != cur_state:
+                exits = utils.get_exits(rooms_labirint[str(cur_state)]['directions'])
+
                 # получаем новую комнату
-                room = get_room_by_type(rooms_labirint[str(cur_state)]['type'], screen, sp.player)
+                room = get_room_by_type(rooms_labirint[str(cur_state)]['type'], screen, sp.player, exits)
                 was_room = cur_state  # теперь мы окончательно здесь
 
             # проверяем коллизии
@@ -188,6 +194,10 @@ def main(screen: pygame.Surface):
             # player logic
             sp.player.update()
             sp.player.draw(screen)
+
+            # heart logic
+            for i in range(health):
+                screen.blit(heart_image, (heart_spacing * i, 10))
         else:
             terminal_action.update()
 
