@@ -52,6 +52,7 @@ class PingPongGame:
             self.bar.update(keys)
             self.ball.update()
 
+            # проверка на столкновение с платформой
             if self.ball.rect.colliderect(self.bar.rect):
                 if self.ball.rect.bottom < self.bar.rect.bottom - 33:
                     if self.ball.change_x <= 40:
@@ -61,6 +62,7 @@ class PingPongGame:
                     self.ball.change_y = -self.ball.change_y
                     self.score += 1
 
+            # проверка на уход шара ниже платформы
             if self.ball.rect.bottom >= self.bar.rect.bottom - 5:
                 self.attempts -= 1
                 self.ball.rect.x = self.screen_rect.right // 2
