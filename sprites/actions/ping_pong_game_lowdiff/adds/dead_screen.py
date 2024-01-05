@@ -7,18 +7,18 @@ class DeadScreen:
     def __init__(self, screen):
         self.screen = screen
         self.bsod_image = pygame.transform.rotozoom(
-            load_image("reaction_maxwell_cat.png"),
+            load_image("ping_pong/meme_ping_pong.png"),
             0,
-            0.5
+            2.5
         )
         self.font = pygame.font.SysFont("Arial", 32)
-        self.custom_message = f"Ты проиграл терминал с котом maxwell!"
+        self.custom_message = f"Ты проиграл терминал с игрой пинг-понг!"
         self.custom_message_2 = "За это ты потеряешь одну жизнь!"
         self.hint_text = "Нажмите ESC чтобы выйти"
 
         # цвета
         self.white = (255, 255, 255)
-        self.blue = (0, 0, 255)
+        self.blue = (0, 123, 210)
 
     def display_dead_screen(self):
         keys = pygame.key.get_pressed()

@@ -5,4 +5,4 @@ from .room.main_room import MainRoom
 from .room.spawn_room import SpawnRoom
 from .room.terminal1_room.terminal1_room import Terminal1Room
 from .room.terminal1room_maxwell_cat.terminal1room_maxwell_cat import Terminal1RoomMaxwellCat
-from .room.terminal1room_snake.terminal1room_snake import Terminal1RoomSnake
+from .room.terminal1room_ping_pong.terminal1room_ping_pong import Terminal1RoomPingPong

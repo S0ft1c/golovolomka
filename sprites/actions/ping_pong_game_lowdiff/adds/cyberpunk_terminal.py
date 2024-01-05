@@ -10,12 +10,7 @@ class CyberpunkTerminal:
 
         # Загрузка изображений
         self.image1 = pygame.transform.rotozoom(
-            load_image("happy_maxwell_cat.png"),
-            0,
-            0.35
-        )
-        self.image2 = pygame.transform.rotozoom(
-            load_image("reaction_maxwell_cat.png"),
+            load_image("ping_pong/success.png"),
             0,
             0.35
         )
@@ -39,8 +34,6 @@ class CyberpunkTerminal:
 
         # Отображение картинок
         self.screen.blit(self.image1, (self.screen.get_width() // 4, self.screen.get_height() // 2))
-        self.screen.blit(self.image2, (
-            3 * self.screen.get_width() // 4 - self.image2.get_width(), self.screen.get_height() // 2))
 
         # Отображение подсказки
         if hint_timer < 60:  # Отображаем подсказку в течение 60 кадров (примерно 1 секунда)
