@@ -14,7 +14,7 @@ class Terminal1RoomPingPong(Terminal1Room):
         if not compl:
             self.ping_pong_terminal = place_terminal(410, 500, PingPongGameAction(self.screen))
         else:
-            self.ping_pong_snake_terminal = place_terminal(410, 500, TerminalCompletedAction(self.screen))
+            self.ping_pong_terminal = place_terminal(410, 500, TerminalCompletedAction(self.screen))
 
         self.hole = pygame.transform.rotozoom(
                 load_image('ping_pong/hole.png'),
