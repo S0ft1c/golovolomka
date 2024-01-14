@@ -6,3 +6,4 @@ from .maxwell_game_lowdiff.maxwell_game_action import MaxwellGameAction
 from sprites.actions.terminal_completed_action.termial_completed import TerminalCompleted
 from .terminal_completed_action.terminal_completed_action import TerminalCompletedAction
 from .gosling_person_dialog.gosling_person_dialog_action import GoslingPersonDialogAction
+from .gosling_game_action.gosling_game_action import GoslingGameAction

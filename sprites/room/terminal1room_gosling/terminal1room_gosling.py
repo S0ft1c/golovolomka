@@ -5,6 +5,7 @@ from utils import place_terminal
 from sprites.actions import TerminalCompletedAction
 from sprites import Person
 from sprites.actions import GoslingPersonDialogAction
+from sprites.actions import GoslingGameAction
 
 
 class Terminal1RoomGosling(Terminal1Room):
@@ -12,7 +13,7 @@ class Terminal1RoomGosling(Terminal1Room):
         super().__init__(screen, player, exits)
 
         if not compl:
-            self.gosling_terminal = place_terminal(300, 400, None)
+            self.gosling_terminal = place_terminal(300, 400, GoslingGameAction(screen))
         else:
             self.gosling_terminal = place_terminal(300, 400, TerminalCompletedAction(screen))
 
