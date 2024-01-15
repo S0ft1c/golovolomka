@@ -1,5 +1,6 @@
 from sprites import SpawnRoom, Terminal1Room, Terminal1RoomMaxwellCat
-from sprites.room.terminal1room_gosling.terminal1room_gosling import Terminal1RoomGosling, Terminal1RoomPingPong
+from sprites.room.terminal1room_gosling.terminal1room_gosling import Terminal1RoomGosling
+from sprites.room.terminal1room_ping_pong.terminal1room_ping_pong import Terminal1RoomPingPong
 
 
 
