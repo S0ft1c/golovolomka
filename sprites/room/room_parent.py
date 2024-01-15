@@ -13,7 +13,6 @@ class RoomParent:
         Отвечает за отображение необходимого, а также и счета нажатий и клавиш.
         :return: None
         """
-        # TODO: добавить больше методов обработки комнат
         if self.player.rect.x - self.screen.get_rect().width > 30:
             pygame.event.post(pygame.event.Event(PLAYER_OUT_OF_RIGHT))
             return

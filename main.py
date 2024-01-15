@@ -14,7 +14,7 @@ def main(screen: pygame.Surface):
 
     # background creation
     background = pygame.transform.rotozoom(
-        load_image('room_assets/2 Background/1.png'),
+        load_image('room_assets/2 Background/base_room.png'),
         0, 4,
     )
     background_rect = background.get_rect()
