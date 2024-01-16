@@ -1,6 +1,7 @@
 from sprites import SpawnRoom, Terminal1Room, Terminal1RoomMaxwellCat
 from sprites.room.terminal1room_gosling.terminal1room_gosling import Terminal1RoomGosling
 from sprites.room.terminal1room_ping_pong.terminal1room_ping_pong import Terminal1RoomPingPong
+from sprites.room.terminal1room_snake.terminal1room_snake import Terminal1RoomSnake
 
 
 
@@ -24,3 +25,5 @@ def get_room_by_type(type: str, screen, player, exits=None):
         return Terminal1RoomPingPong(screen, player, exits, compl=('_compl' in type))
     if nt == 'terminal1room_gosling':
         return Terminal1RoomGosling(screen, player, exits, compl=('_compl' in type))
+    if nt == 'terminal1room_snake':
+        return Terminal1RoomSnake(screen, player, exits, compl=('_compl' in type))

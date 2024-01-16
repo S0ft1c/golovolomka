@@ -1,14 +1,14 @@
 from ..action_parent import ActionParent
-from .ping_pong_game_screen import PingPongGame
+from .snake_game_screen import SnakeGame
 
 
-class PingPongGameAction(ActionParent):
+class SnakeGameAction(ActionParent):
     def __init__(self, screen):
         super().__init__(screen)
 
     def activate(self):
         super().activate()
-        self.ping_pong_game_screen = PingPongGame(self.screen)
+        self.snake_game_screen = SnakeGame(self.screen)
 
     def get_the_action_screen(self):
-        return self.ping_pong_game_screen
+        return self.snake_game_screen

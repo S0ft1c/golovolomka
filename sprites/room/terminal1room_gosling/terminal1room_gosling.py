@@ -33,15 +33,17 @@ class Terminal1RoomGosling(Terminal1Room):
 
         # гифка сиреневой девки
         self.purple_girl = []
-        for idx in range(0, 71 + 1):
+        for idx in range(0, 60, 4):
             self.purple_girl.append(pygame.transform.scale(
                 load_image(f'purple_girl/frame_{idx:02}_delay-0.02s.gif'),
                 (448, 448 * 0.42 - 2)
             ))
 
+        print(len(self.purple_girl))
+
         # гифка гослинга
         self.gosling_looking = []
-        for idx in range(0, 14 + 1):
+        for idx in range(0, 15):
             self.gosling_looking.append(pygame.transform.scale(
                 load_image(f'gosling_looking/frame_{idx:02}_delay-0.07s.gif'),
                 (448, 448 * 0.42 - 2)
@@ -57,7 +59,7 @@ class Terminal1RoomGosling(Terminal1Room):
         elapsed_time = pygame.time.get_ticks() - self.start_time
 
         # обновляем положение девки
-        current_frame = int((elapsed_time // 100) % 57)
+        current_frame = int((elapsed_time // 100) % 14)
         self.screen.blit(self.purple_girl[current_frame], (66, 70))
 
         # обновляем положение гослинга
