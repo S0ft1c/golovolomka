@@ -35,4 +35,4 @@ class Snake(Sprite):
 
     def blitme(self, screen):
         for pos in self.snake_pos:
-            pygame.draw.rect(screen, (173, 216, 230), pygame.Rect(pos[0], pos[1], self.snake_size, self.snake_size))
+            pygame.draw.rect(screen, (0, 240, 0), pygame.Rect(pos[0], pos[1], self.snake_size, self.snake_size))

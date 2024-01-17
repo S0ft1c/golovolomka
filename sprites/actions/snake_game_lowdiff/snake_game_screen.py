@@ -25,7 +25,7 @@ class SnakeGame:
 
         self.score = 0
 
-        self.background_1 = pygame.transform.scale(load_image('Cyberpunk Backgrounds/Grid 3.png'), (1024, 896))
+        self.background_1 = pygame.transform.scale(load_image('snake/back1.png'), (1024, 896))
 
         self.completed = False  # пройдена головоломка или нет
         self.died = False  # проиграл он или нет
@@ -43,15 +43,14 @@ class SnakeGame:
             keys = pygame.key.get_pressed()
             self.snake.update(keys)
 
+            # проверка на удар со стенами
             head_x, head_y = self.snake.new_head_pos
-            print(self.snake.new_head_pos)
             if head_x < 0 or head_x >= self.screen_rect.right or head_y < 0 or head_y >= self.screen_rect.bottom:
                 self.died = True
 
-
-
             self.snake.snake_pos.insert(0, self.snake.new_head_pos)
 
+            # проверка на схаваную еду
             if self.snake.new_head_pos == self.food_pos:
                 self.score += 1
                 self.fps += 1
@@ -65,17 +64,18 @@ class SnakeGame:
 
             self.draw()
 
-            if self.score >= 13:
+            if self.score >= 12:
                 self.completed = True
 
     def draw(self):
         self.screen.fill((255, 255, 255))
         self.screen.blit(self.background_1, (0, 0))
         self.snake.blitme(self.screen)
-        pygame.draw.rect(self.screen, (217, 25, 255), pygame.Rect(self.food_pos[0], self.food_pos[1], self.food_size,
-                                                               self.food_size))
+        pygame.draw.rect(self.screen, (255, 0, 0), pygame.Rect(self.food_pos[0], self.food_pos[1], self.food_size,
+                                                                  self.food_size))
 
-        score_text_surface = self.font.render(f'Счёт: {self.score} / 13', True, (255, 255, 255))
+
+        score_text_surface = self.font.render(f'Счёт: {self.score} / 12', True, (255, 255, 255))
         self.screen.blit(score_text_surface, (10, 10))
 
         pygame.display.flip()

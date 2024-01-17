@@ -28,7 +28,7 @@ class DeadScreen:
         self.screen.fill((0, 250, 0))
 
         # отображаем картинку
-        self.screen.blit(self.bsod_image, (0, 0))
+        self.screen.blit(self.bsod_image, (300, 0))
 
         # отображение текста
         text = self.font.render(self.custom_message, True, self.white)
