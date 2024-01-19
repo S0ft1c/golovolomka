@@ -1,8 +1,10 @@
 from sprites import SpawnRoom, Terminal1Room, Terminal1RoomMaxwellCat
 from sprites.room.terminal1room_gosling.terminal1room_gosling import Terminal1RoomGosling
 from sprites.room.terminal1room_ping_pong.terminal1room_ping_pong import Terminal1RoomPingPong
+from sprites.room.terminal1room_question.terminal1room_question import Terminal1RoomQuestion
 from sprites.room.terminal1room_snake.terminal1room_snake import Terminal1RoomSnake
-
+from sprites.room.terminal1room_q2.terminal1room_q2 import Terminal1RoomQuestion2
+from sprites.room.terminal1_new_spawn_room.ternimal1_new_spawn_room import Terminal1RoomNewSpawn
 
 
 def get_room_by_type(type: str, screen, player, exits=None):
@@ -27,3 +29,10 @@ def get_room_by_type(type: str, screen, player, exits=None):
         return Terminal1RoomGosling(screen, player, exits, compl=('_compl' in type))
     if nt == 'terminal1room_snake':
         return Terminal1RoomSnake(screen, player, exits, compl=('_compl' in type))
+    if nt == 'terminal1room_question':
+        return Terminal1RoomQuestion(screen, player, exits, compl=('_compl' in type))
+    if nt == 'terminal1room_q2':
+        return Terminal1RoomQuestion2(screen, player, exits, compl=('_compl' in type))
+    if nt == 'new_spawn':
+        return Terminal1RoomNewSpawn(screen, player, exits, compl=('_compl' in type))
+

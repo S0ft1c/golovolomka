@@ -59,7 +59,7 @@ class GoslingGameScreen:
         self.CAR_SPEED = 5
         self.ENEMY_CAR_SPEED = 5
         self.HEALTH = 3
-        self.TIMER = 120  # seconds
+        self.TIMER = 1000  # seconds
         self.END_TIME = pygame.time.get_ticks() + self.TIMER * 1000  # convert seconds to milliseconds
 
         # Set up the game window
@@ -98,7 +98,7 @@ class GoslingGameScreen:
             self.HEALTH -= 1
 
     def respawn_enemy_cars(self):
-        if len(self.enemy_group) < 15:
+        if len(self.enemy_group) < 5:
             self.spawn_enemy_car()
 
         for enemy_car in self.enemy_group:
@@ -108,13 +108,13 @@ class GoslingGameScreen:
 
     def draw_objects(self):
         # Draw everything
-        self.screen.fill(self.BLACK)
+        self.screen.fill((150, 150, 150))
         self.player_group.draw(self.screen)
         self.enemy_group.draw(self.screen)
 
         # Display health and time
         health_text = self.font.render(f"Health: {self.HEALTH}", True, (255, 255, 255))
-        time_text = self.font.render(f"Time: {self.TIMER - pygame.time.get_ticks() // 1000}", True, (255, 255, 255))
+        time_text = self.font.render(f"Time: {self.TIMER}", True, (255, 255, 255))
         self.screen.blit(health_text, (10, 10))
         self.screen.blit(time_text, (10, 40))
 
@@ -128,8 +128,8 @@ class GoslingGameScreen:
             return
 
         # Check game timer
-        current_time = pygame.time.get_ticks()
-        if current_time > self.END_TIME and self.HEALTH > 0:
+        self.TIMER -= 1
+        if self.TIMER <= 0 and self.HEALTH > 0:
             self.vs.display_victory_screen()
             return
 

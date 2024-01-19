@@ -95,5 +95,27 @@ class DB:
         except Exception as e:
             print(f'DB -> Error in update_health_lost_in_save()\n{e}')
 
+    def clear(self, id):
+        try:
+            self.cur.execute("""
+             delete from saves
+             where id < ?
+             """,
+                             (id,))
+            self.conn.commit()
+        except Exception as e:
+            print(f'DB -> Error in update_health_lost_in_save()\n{e}')
+
+    def super_clear(self, id):
+        try:
+            self.cur.execute("""
+             delete from saves
+             where id <= ?
+             """,
+                             (id,))
+            self.conn.commit()
+        except Exception as e:
+            print(f'DB -> Error in update_health_lost_in_save()\n{e}')
+
 
 db = DB()

@@ -45,6 +45,10 @@ def main(screen: pygame.Surface):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # exit
                 running = False
+                db.clear(cur_save_id)
+            if health <= 0:
+                running = False
+                db.super_clear(cur_save_id)
 
             if event.type == OPEN_TERMINAL:  # если пользователь открывает терминал, то мы изменяем статус
                 was_room = cur_state
@@ -73,11 +77,12 @@ def main(screen: pygame.Surface):
                 difficulty = 1  # TODO: реализовать полноценную функцию по расчету ф-ии сложности
                 rooms_labirint, level_asset = utils.room_creation(difficulty)
                 sp.player.rect.x, sp.player.rect.y = 200, 200
-
                 db.create_save(rooms_labirint)  # create the save
 
                 # сразу проставляем, где мы находимся
                 cur_state = 1
+
+                cur_save_id = db.get_save_ids()[-1]
 
             # TODO: сделать обработчик выхода в exit
             if event.type == PLAYER_OUT_OF_RIGHT:  # игрок вышел за границы экрана справа

@@ -1,8 +1,7 @@
 import pygame
 from sprites.actions import MaxwellGameAction, TerminalCompletedAction
 from ..terminal1_room.terminal1_room import Terminal1Room
-from utils import create_main_walls_with_exits, place_terminal
-import os
+from utils import place_terminal
 from funcs.load_image import load_image
 
 

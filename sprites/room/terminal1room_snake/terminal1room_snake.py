@@ -1,8 +1,7 @@
 import pygame
 from sprites.actions import SnakeGameAction, TerminalCompletedAction
-from ..terminal1_room.terminal1_room import Terminal1Room
-from utils import create_main_walls_with_exits, place_terminal
-import os
+from sprites.room.terminal1_room.terminal1_room import Terminal1Room
+from utils import place_terminal
 from funcs.load_image import load_image
 from sprites.terminal.border import Border
 
@@ -12,9 +11,9 @@ class Terminal1RoomSnake(Terminal1Room):
         super().__init__(screen, player, exits)
 
         if not compl:
-            self.ping_pong_terminal = place_terminal(410, 500, SnakeGameAction(self.screen))
+            self.snake_terminal = place_terminal(410, 500, SnakeGameAction(self.screen))
         else:
-            self.ping_pong_terminal = place_terminal(410, 500, TerminalCompletedAction(self.screen))
+            self.snake_terminal = place_terminal(410, 500, TerminalCompletedAction(self.screen))
 
         self.hole = pygame.transform.rotozoom(
                 load_image('snake/snakes.png'),
@@ -26,16 +25,16 @@ class Terminal1RoomSnake(Terminal1Room):
 
     def update(self):
         super().update()
-        self.ping_pong_terminal.update(self.screen, self.player)
+        self.snake_terminal.update(self.screen, self.player)
         self.hole_border.update(self.screen, self.player)
 
     def get_objs(self):
         objs = super().get_objs()
-        objs.append(self.ping_pong_terminal)
+        objs.append(self.snake_terminal)
         objs.append(self.hole_border)
         return objs
 
     def get_terminal_action(self):
-        for terminal in [self.ping_pong_terminal]:
+        for terminal in [self.snake_terminal]:
             if terminal.get_using():  # если терминал используется
                 return terminal.action
