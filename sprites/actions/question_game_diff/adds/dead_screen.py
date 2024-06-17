@@ -9,7 +9,7 @@ class DeadScreen:
         self.bsod_image = pygame.transform.rotozoom(
             load_image("loser.png"),
             0,
-            0.15
+            0.3
         )
         self.font = pygame.font.SysFont("Arial", 32)
         self.custom_message = f"Ты проиграл игру в змейку!"

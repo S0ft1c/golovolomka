@@ -17,7 +17,7 @@ class Terminal1RoomQuestion(Terminal1Room):
         self.hole = pygame.transform.rotozoom(
                 load_image('q1/questionmark.png'),
                 0,
-                0.20,
+                1.2,
             )
 
     def update(self):

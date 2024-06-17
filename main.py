@@ -1,5 +1,10 @@
 import sys
+import time
+
+import pygame.display
+
 import sprites as sp
+from time import sleep
 import utils
 from funcs.load_image import load_image  # kinda cringe
 from funcs.get_room_by_type import get_room_by_type
@@ -47,6 +52,26 @@ def main(screen: pygame.Surface):
                 running = False
                 db.clear(cur_save_id)
             if health <= 0:
+                img = pygame.transform.rotozoom(
+                    load_image('lose.png'),
+                    0,
+                    1.35
+                )
+                screen.blit(img, (-350, 0))
+                pygame.display.flip()
+                sleep(3)
+                running = False
+                db.super_clear(cur_save_id)
+
+            if terminals_completed == 8:
+                img = pygame.transform.rotozoom(
+                    load_image('win.png'),
+                    0,
+                    1.99
+                )
+                screen.blit(img, (-350, 0))
+                pygame.display.flip()
+                sleep(3)
                 running = False
                 db.super_clear(cur_save_id)
 

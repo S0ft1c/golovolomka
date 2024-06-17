@@ -12,7 +12,7 @@ class CyberpunkTerminal:
         self.image1 = pygame.transform.rotozoom(
             load_image("winner.png"),
             0,
-            0.10
+            0.5
         )
 
         # Подсказка
